@@ -1,0 +1,61 @@
+body {
+  text-align: center;
+  margin-top: 10%;
+  font-family: 'Roboto', sans-serif;
+}
+
+h2 {
+  font-family: 'Chelsea Market', cursive;
+}
+
+#search, #submit {
+  vertical-align: top;
+  height: 2.5em;
+  box-sizing: border-box;
+}
+
+#search {
+  border: 0.8px solid lightgrey;
+  padding: 3px;
+}
+
+#submit {
+  border: none;
+  width: 4em;
+  background-color: lightblue;
+}
+
+#result-box {
+  width: 60%;
+  margin: auto;
+}
+
+#error-message {
+  margin-top: 15px;
+}
+
+#result-box ol {
+  list-style-position: inside;
+  padding: 0;
+}
+
+#result-box li {
+  margin-bottom: 15px;
+  font-weight: 300;
+}
+
+.definition {
+  display: block;
+}
+
+.synonym {
+  margin: 2px;
+  background: lightgrey;
+  padding: 5px 8px;
+  display: inline-block;
+  font-weight: 400;
+}
+
+.action-verb {
+  background: lightblue;
+}
