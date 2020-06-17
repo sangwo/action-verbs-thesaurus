@@ -51,7 +51,6 @@ function requestWordInfo(searchTerm) {
     type: "GET",
     data: { "search": searchTerm },
     success: function(result) {
-      console.log(JSON.parse(result)); // TODO: remove
       var wordInfo = JSON.parse(result);
 
       // the word doesn't exist at all (empty list) or it's mistyped (a list of spelling suggestions)
