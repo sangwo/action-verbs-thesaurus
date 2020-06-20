@@ -5,3 +5,4 @@ venv
 resume\ action\ verb\ synonyms\ project\ sources.txt
 create_action_verb_list.py
 verb_lists
+database.db

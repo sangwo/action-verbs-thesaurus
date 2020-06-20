@@ -86,12 +86,26 @@ function showSynonyms() {
   if (searchTerm.length == 0) {
     showErrorMessage("Please enter a word."); // eg. "", "   "
   } else {
-    if (isActionVerb(searchTerm)) {
-      $("#search").css("border", "4px solid lightblue");
-    } else {
-      $("#search").css("border", "4px solid lightgrey");
-    }
-    requestWordInfo(searchTerm);
+    // check if the number of requests from the user exceeds the limit
+    $.ajax({
+      url: "/requests",
+      type: "GET",
+      success: function(result) {
+        if (result != "success") {
+          showErrorMessage(result);
+        } else {
+          if (isActionVerb(searchTerm)) {
+            $("#search").css("border", "4px solid lightblue");
+          } else {
+            $("#search").css("border", "4px solid lightgrey");
+          }
+          requestWordInfo(searchTerm);
+        }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        showErrorMessage("Sorry, something went wrong: " + jqXHR.status + " " + jqXHR.statusText);
+      }
+    });
   }
 }
 
