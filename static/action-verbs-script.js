@@ -36,6 +36,7 @@ function addDefSyn(definitions, synonyms) {
     item = item.prepend(actionVSpan).prepend(defSpan);
     $("#result-box ol").append(item);
   }
+  $(".definition").after("<br>");
 }
 
 // Given an error message, show it as a result and change the border color of search bar
