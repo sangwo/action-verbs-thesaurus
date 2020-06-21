@@ -110,10 +110,30 @@ function showSynonyms() {
 }
 
 $(document).ready(function() {
+  $("#info-modal").hide(); // modal hidden by default
+
+  // when "Find" button is clicked, show synonyms
   $("input[type='submit']").on("click", function() {
     $("#error-message").empty();
     $("#result-box ol").empty();
     showSynonyms();
     return false;
   });
+
+  // when "Info" button is clicked, show the modal
+  $("#info-modal-button").on("click", function() {
+    $("#info-modal").show();
+  });
+
+  // when close button is clicked, close the modal
+  $("#close").on("click", function() {
+    $("#info-modal").hide();
+  });
+
+  // when anywhere outside of the modal is clicked, close it
+  $(window).on("click", function(event) {
+    if (event.target == document.getElementById("info-modal")) {
+      $("#info-modal").hide();
+    }
+  })
 });
