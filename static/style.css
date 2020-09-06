@@ -62,6 +62,11 @@ img {
   padding: 5px 8px;
   display: inline-block;
   font-weight: 400;
+  cursor: pointer;
+}
+
+.synonym:hover {
+  color: grey;
 }
 
 .action-verb {
@@ -70,10 +75,16 @@ img {
 
 /*** modal button ***/
 #info-modal-button {
-  position: absolute;
-  top: 15px;
-  left: 20px;
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
   font-family: 'Chelsea Market', cursive;
+  font-size: large;
+  line-height: 2.5em;
+  background-color: lightblue;
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 50%;
 }
 
 #info-modal-button:hover, #info-modal-button:focus {
@@ -92,6 +103,7 @@ img {
   z-index: 1;
   overflow: auto;
   padding-top: 60px;
+  display: none; /* modal hidden by default */
 }
 
 #modal-content {
@@ -102,6 +114,28 @@ img {
   text-align: left;
   position: relative;
   margin-bottom: 60px; /* works as padding-bottom of .modal */
+  border-radius: 3px;
+  line-height: 1.5;
+}
+
+#modal-content.showModal {
+  animation-name: slideDown;
+  animation-duration: 0.4s;
+}
+
+@keyframes slideDown {
+  from { top: -300px; opacity: 0; }
+  to { top: 0; opacity: 1; }
+}
+
+#modal-content.hideModal {
+  animation-name: slideUp;
+  animation-duration: 0.4s;
+}
+
+@keyframes slideUp {
+  from { top: 0; opacity: 1; }
+  to { top: -300px; opacity: 0; }
 }
 
 #close {

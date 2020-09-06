@@ -37,6 +37,10 @@ function addDefSyn(definitions, synonyms) {
     $("#result-box ol").append(item);
   }
   $(".definition").after("<br>");
+  $(".synonym").on("click", function() {
+    copyToClipboard($(this));
+    showErrorMessage("Copied to clipboard.");
+  });
 }
 
 // Given an error message, show it as a result and change the border color of search bar
@@ -59,7 +63,7 @@ function requestWordInfo(searchTerm) {
         showErrorMessage("Sorry, the word you've entered isn't in the thesaurus :("); // eg. "noun", "dsfsdd"
       } else {
         // find the index that contains the verb form
-        var verbInfo;
+        var verbInfo = null;
         for (var i = 0; i < wordInfo.length; i++) {
           if (wordInfo[i].fl == "verb") {
             verbInfo = wordInfo[i];
@@ -110,9 +114,17 @@ function showSynonyms() {
   }
 }
 
-$(document).ready(function() {
-  $("#info-modal").hide(); // modal hidden by default
+// Given an element of which to copy text, copy to clipboard
+function copyToClipboard(element) {
+  var textArea = document.createElement("textarea");
+  textArea.value = element.text();
+  document.body.appendChild(textArea);
+  textArea.select();
+  document.execCommand("copy");
+  textArea.remove();
+}
 
+$(document).ready(function() {
   // when "Find" button is clicked, show synonyms
   $("input[type='submit']").on("click", function() {
     $("#error-message").empty();
@@ -123,18 +135,22 @@ $(document).ready(function() {
 
   // when "Info" button is clicked, show the modal
   $("#info-modal-button").on("click", function() {
+    $("#modal-content").removeClass("hideModal").addClass("showModal");
     $("#info-modal").show();
+    $("#info-modal").scrollTop(0); // scroll to top
   });
 
   // when close button is clicked, close the modal
   $("#close").on("click", function() {
-    $("#info-modal").hide();
+    $("#modal-content").removeClass("showModal").addClass("hideModal");
+    setTimeout(function() { $("#info-modal").hide(); }, 400);
   });
 
   // when anywhere outside of the modal is clicked, close it
   $(window).on("click", function(event) {
     if (event.target == document.getElementById("info-modal")) {
-      $("#info-modal").hide();
+      $("#modal-content").removeClass("showModal").addClass("hideModal");
+      setTimeout(function() { $("#info-modal").hide(); }, 400);
     }
-  })
+  });
 });
